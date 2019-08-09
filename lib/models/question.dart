@@ -14,7 +14,7 @@ class QuestionModel {
   // 問題
   String question;
 
-  // 答えの単語の配列
+  // 答えの単語のList
   List<Word> answers;
 
   // 正解
@@ -185,7 +185,7 @@ class QuestionsModel with ChangeNotifier {
 
   // コンストラクタ
   QuestionsModel(this.type) {
-    _questions = [0, 1, 2]
+    _questions = [7, 4, 6]
         .map((index) =>
             QuestionModel(type, sampleNotebook[index], _makeAnswers(index, 3)))
         .toList();
@@ -197,17 +197,16 @@ class QuestionsModel with ChangeNotifier {
 
   int get numberOfQuestions => _questions.length;
 
-  List<String> currentAnswers() {
-    return _questions[_questionIndex].answers.map((word) {
-      return type == QuestionType.en2jp ? word.japaneseWord : word.englishWord;
-    }).toList();
-  }
+  List<Word> get currentAnswers => _questions[_questionIndex].answers;
 
   bool isCorrectAnswer(String answerText) {
     final selectedAnswer = _questions[_questionIndex].selectedAnswer;
     final correctAnswer = _questions[_questionIndex].correctAnswer;
     return selectedAnswer != null && answerText == correctAnswer;
   }
+
+  bool isSelectAnswer(String answerText) =>
+      _questions[_questionIndex].selectedAnswer != null;
 
   void nextIndex() {
     _questionIndex++;

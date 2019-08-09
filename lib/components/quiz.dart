@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
+import 'package:vocabulary_notebook_flutter/models/word.dart';
 import 'package:vocabulary_notebook_flutter/components/question.dart';
 import 'package:vocabulary_notebook_flutter/components/answer.dart';
 
@@ -11,7 +12,7 @@ class Quiz extends StatelessWidget {
       return Column(
         children: [
           Question(),
-          ...(question.currentAnswers()).map((answer) {
+          ...(question.currentAnswers).map((Word answer) {
             return Answer(answer);
           }).toList()
         ],
