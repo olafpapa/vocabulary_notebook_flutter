@@ -8,7 +8,7 @@ class Answer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final question = Provider.of<QuestionIndexModel>(context);
+    final question = Provider.of<QuestionModel>(context);
 
     return Container(
       width: double.infinity,
@@ -16,7 +16,10 @@ class Answer extends StatelessWidget {
         color: Colors.blueGrey,
         textColor: Colors.white,
         child: Text(answerText),
-        onPressed: () => question.nextIndex(),
+        onPressed: () {
+          question.selectAnswer(answerText);
+          question.nextIndex();
+        },
       ),
     );
   }

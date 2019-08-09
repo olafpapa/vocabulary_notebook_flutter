@@ -5,7 +5,7 @@ import 'package:vocabulary_notebook_flutter/models/question.dart';
 class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final question = Provider.of<QuestionIndexModel>(context);
+    final question = Provider.of<QuestionModel>(context);
 
     return Center(
       child: Column(

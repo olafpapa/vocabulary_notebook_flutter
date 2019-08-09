@@ -5,17 +5,14 @@ import 'package:vocabulary_notebook_flutter/components/result.dart';
 import 'package:vocabulary_notebook_flutter/components/quiz.dart';
 
 class Home extends StatelessWidget {
-  final List<Map<String, Object>> questions;
-  Home(this.questions);
-
   @override
   Widget build(BuildContext context) {
-    final question = Provider.of<QuestionIndexModel>(context);
+    final question = Provider.of<QuestionModel>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('英単語帳')),
-      body: question.questionIndex < questions.length
-          ? Quiz(questions: questions)
+      body: question.questionIndex < question.numberOfQuestions
+          ? Quiz()
           : Result(),
     );
   }
