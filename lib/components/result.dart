@@ -16,7 +16,7 @@ class Result extends StatelessWidget {
           ),
           FlatButton(
             child: Text('Restart!'),
-            onPressed: () => question.resetIndex(),
+            onPressed: () => question.reset(),
             textColor: Colors.blue,
           )
         ],

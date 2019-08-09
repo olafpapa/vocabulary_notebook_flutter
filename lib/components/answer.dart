@@ -13,12 +13,15 @@ class Answer extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: RaisedButton(
-        color: Colors.blueGrey,
+        color: question.isCorrectAnswer(answerText)
+            ? Colors.redAccent
+            : Colors.blueGrey,
         textColor: Colors.white,
         child: Text(answerText),
         onPressed: () {
           question.selectAnswer(answerText);
-          question.nextIndex();
+          Future.delayed(
+              const Duration(seconds: 2), () => question.nextIndex());
         },
       ),
     );

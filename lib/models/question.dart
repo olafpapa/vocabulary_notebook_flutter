@@ -7,26 +7,30 @@ class QuestionModel with ChangeNotifier {
     {
       'question': '統合する',
       'answers': ['release', 'stairway', 'consolidate', 'attendant'],
-      'correctAnswer': 2,
-      'selectedAnswer': null
+      'correctAnswer': 'consolidate',
+      'selectedAnswer': null,
+      'result': null,
     },
     {
       'question': '配管工事',
       'answers': ['purchase', 'ignore', 'vary', 'plumbing'],
-      'correctAnswer': 3,
-      'selectedAnswer': null
+      'correctAnswer': 'plumbing',
+      'selectedAnswer': null,
+      'result': null,
     },
     {
       'question': '（販売促進用の）無料の景品',
       'answers': ['distinguished', 'consolidate', 'engaging', 'giveaway'],
-      'correctAnswer': 3,
-      'selectedAnswer': null
+      'correctAnswer': 'giveaway',
+      'selectedAnswer': null,
+      'result': null,
     },
     {
       'question': '水道水',
       'answers': ['tap water', 'clean water', 'mad water', 'sap water'],
-      'correctAnswer': 1,
-      'selectedAnswer': null
+      'correctAnswer': 'tap water',
+      'selectedAnswer': null,
+      'result': null,
     },
   ];
 
@@ -38,19 +42,28 @@ class QuestionModel with ChangeNotifier {
 
   int get numberOfQuestions => _questions.length;
 
+  bool isCorrectAnswer(String answerText) {
+    final selectedAnswer = _questions[_questionIndex]['selectedAnswer'];
+    final correctAnswer = _questions[_questionIndex]['correctAnswer'];
+    return selectedAnswer != null && answerText == correctAnswer;
+  }
+
   void nextIndex() {
     _questionIndex++;
     notifyListeners();
   }
 
-  void resetIndex() {
+  void reset() {
     _questionIndex = 0;
+    _questions.forEach((question) {
+      question['selectedAnswer'] = null;
+    });
     notifyListeners();
   }
 
   void selectAnswer(String answerText) {
-    final int index = (_questions[_questionIndex]['answers'] as List<String>)
-        .indexOf(answerText);
-    _questions[_questionIndex]['selectedAnswer'] = index;
+    _questions[_questionIndex]['selectedAnswer'] = answerText;
+    _questions[_questionIndex]['result'] = isCorrectAnswer(answerText);
+    notifyListeners();
   }
 }
