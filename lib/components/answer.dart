@@ -8,7 +8,7 @@ class Answer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final question = Provider.of<QuestionModel>(context);
+    final question = Provider.of<QuestionsModel>(context);
 
     return Container(
       width: double.infinity,

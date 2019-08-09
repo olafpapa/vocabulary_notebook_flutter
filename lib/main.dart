@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        builder: (context) => QuestionModel(),
+        builder: (context) => QuestionsModel(QuestionType.en2jp),
         child: MaterialApp(
           home: Home(),
         ));

@@ -7,11 +7,11 @@ import 'package:vocabulary_notebook_flutter/components/answer.dart';
 class Quiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<QuestionModel>(builder: (context, question, _) {
+    return Consumer<QuestionsModel>(builder: (context, question, _) {
       return Column(
         children: [
           Question(),
-          ...(question.currentAnswers).map((answer) {
+          ...(question.currentAnswers()).map((answer) {
             return Answer(answer);
           }).toList()
         ],

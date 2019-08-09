@@ -7,7 +7,7 @@ import 'package:vocabulary_notebook_flutter/components/quiz.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final question = Provider.of<QuestionModel>(context);
+    final question = Provider.of<QuestionsModel>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('英単語帳')),
