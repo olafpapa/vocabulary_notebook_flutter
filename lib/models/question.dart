@@ -17,6 +17,9 @@ class QuestionModel {
   // 答えの単語のList
   List<Word> answers;
 
+  // 正解の単語
+  Word word;
+
   // 正解
   String correctAnswer;
 
@@ -26,7 +29,7 @@ class QuestionModel {
   // 正解かどうか
   bool result;
 
-  QuestionModel(this.type, Word word, this.answers) {
+  QuestionModel(this.type, this.word, this.answers) {
     if (type == QuestionType.en2jp) {
       question = word.englishWord;
       correctAnswer = word.japaneseWord;
@@ -199,14 +202,17 @@ class QuestionsModel with ChangeNotifier {
 
   List<Word> get currentAnswers => _questions[_questionIndex].answers;
 
+  Word get correctWord => _questions[_questionIndex].word;
+
   bool isCorrectAnswer(String answerText) {
     final selectedAnswer = _questions[_questionIndex].selectedAnswer;
     final correctAnswer = _questions[_questionIndex].correctAnswer;
     return selectedAnswer != null && answerText == correctAnswer;
   }
 
-  bool isSelectAnswer(String answerText) =>
-      _questions[_questionIndex].selectedAnswer != null;
+  bool isSelectAnswer() => _questions[_questionIndex].selectedAnswer != null;
+
+  bool isLastQuestion() => _questions.length - 1 == _questionIndex;
 
   void nextIndex() {
     _questionIndex++;

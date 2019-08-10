@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vocabulary_notebook_flutter/components/sentence.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
 import 'package:vocabulary_notebook_flutter/components/question.dart';
@@ -24,7 +25,19 @@ class Quiz extends StatelessWidget {
                   )
                 ],
               );
-            }).toList()
+            }).toList(),
+            question.isSelectAnswer()
+                ? Sentence(question.correctWord)
+                : SizedBox.shrink(),
+            question.isSelectAnswer()
+                ? FlatButton(
+                    child: question.isLastQuestion()
+                        ? Text('結果を見る')
+                        : Text('次の問題へ'),
+                    onPressed: () => question.nextIndex(),
+                    textColor: Colors.blue,
+                  )
+                : SizedBox.shrink(),
           ],
         ),
       );

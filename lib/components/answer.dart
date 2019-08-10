@@ -35,7 +35,7 @@ class Answer extends StatelessWidget {
                   answerText,
                   style: TextStyle(fontSize: 24),
                 ),
-                question.isSelectAnswer(answerText)
+                question.isSelectAnswer()
                     ? Text(
                         translatedText,
                         style: TextStyle(fontSize: 18),
@@ -45,9 +45,9 @@ class Answer extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            question.selectAnswer(answerText);
-            Future.delayed(
-                const Duration(seconds: 2), () => question.nextIndex());
+            if (!question.isSelectAnswer()) {
+              question.selectAnswer(answerText);
+            }
           },
         ),
       ),
