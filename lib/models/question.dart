@@ -215,7 +215,10 @@ class QuestionsModel with ChangeNotifier {
 
   void reset() {
     _questionIndex = 0;
-    _questions.forEach((question) => question.selectedAnswer = null);
+    _questions.forEach((question) {
+      question.selectedAnswer = null;
+      question.result = null;
+    });
     notifyListeners();
   }
 
