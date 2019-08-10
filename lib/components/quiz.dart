@@ -9,13 +9,24 @@ class Quiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<QuestionsModel>(builder: (context, question, _) {
-      return Column(
-        children: [
-          Question(),
-          ...(question.currentAnswers).map((Word answer) {
-            return Answer(answer);
-          }).toList()
-        ],
+      return Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Question(),
+            ...(question.currentAnswers).map((Word answer) {
+              return Column(
+                children: <Widget>[
+                  Answer(answer),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 25,
+                  )
+                ],
+              );
+            }).toList()
+          ],
+        ),
       );
     });
   }
