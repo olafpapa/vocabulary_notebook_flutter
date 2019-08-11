@@ -198,6 +198,8 @@ class QuestionsModel with ChangeNotifier {
 
   String get currentQuestion => _questions[_questionIndex].question;
 
+  String get correctAnswer => _questions[_questionIndex].correctAnswer;
+
   int get numberOfQuestions => _questions.length;
 
   List<Word> get currentAnswers => _questions[_questionIndex].answers;

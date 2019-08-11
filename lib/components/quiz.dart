@@ -4,7 +4,7 @@ import 'package:vocabulary_notebook_flutter/components/sentence.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
 import 'package:vocabulary_notebook_flutter/components/question.dart';
-import 'package:vocabulary_notebook_flutter/components/answer.dart';
+import 'package:vocabulary_notebook_flutter/components/answer_button.dart';
 
 class Quiz extends StatelessWidget {
   @override
@@ -18,7 +18,7 @@ class Quiz extends StatelessWidget {
             ...(question.currentAnswers).map((Word answer) {
               return Column(
                 children: <Widget>[
-                  Answer(answer),
+                  AnswerButton(answer),
                   SizedBox(
                     width: double.infinity,
                     height: 25,
