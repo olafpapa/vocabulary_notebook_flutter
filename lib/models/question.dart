@@ -1,6 +1,6 @@
+import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
-import 'dart:math';
 
 enum QuestionType {
   jp2en, // 和英
