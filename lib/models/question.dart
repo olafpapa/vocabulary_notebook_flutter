@@ -202,6 +202,9 @@ class QuestionsModel with ChangeNotifier {
 
   int get numberOfQuestions => _questions.length;
 
+  int get numberOfRightAnswers =>
+      _questions.where((q) => q.result == true).toList().length;
+
   List<Word> get currentAnswers => _questions[_questionIndex].answers;
 
   Word get correctWord => _questions[_questionIndex].word;

@@ -7,12 +7,18 @@ class Result extends StatelessWidget {
   Widget build(BuildContext context) {
     final question = Provider.of<QuestionsModel>(context);
 
-    return Center(
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           Text(
-            '終わり',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            '${question.numberOfQuestions}問中 ${question.numberOfRightAnswers}問正解',
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            '正答率 ${(question.numberOfRightAnswers / question.numberOfQuestions).round()}％',
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
           FlatButton(
             child: Text('Restart!'),
