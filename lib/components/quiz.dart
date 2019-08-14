@@ -33,7 +33,7 @@ class Quiz extends StatelessWidget {
                 ? FlatButton(
                     child: question.isLastQuestion()
                         ? Text('結果を見る')
-                        : Text('次の問題へ'),
+                        : Text('${question.questionIndex + 2}問目へ'),
                     onPressed: () => question.nextIndex(),
                     textColor: Colors.blue,
                   )
