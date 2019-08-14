@@ -1,99 +1,13 @@
-import 'dart:io';
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
+import 'package:vocabulary_notebook_flutter/utils/tts.dart';
 
-class ResultList extends StatefulWidget {
-  @override
-  _ResultListState createState() => _ResultListState();
-}
-
-enum TtsState { playing, stopped }
-
-class _ResultListState extends State<ResultList> {
-  FlutterTts flutterTts;
-  dynamic languages;
-  dynamic voices;
-  String language;
-  String voice;
-  TtsState ttsState = TtsState.stopped;
-
-  get isPlaying => ttsState == TtsState.playing;
-  get isStopped => ttsState == TtsState.stopped;
-
-  @override
-  initState() {
-    super.initState();
-    initTts();
-  }
-
-  initTts() {
-    flutterTts = FlutterTts();
-
-    if (Platform.isAndroid) {
-      flutterTts.ttsInitHandler(() {
-        _getLanguages();
-        _getVoices();
-      });
-    } else if (Platform.isIOS) {
-      _getLanguages();
-      _getVoices();
-    }
-
-    flutterTts.setStartHandler(() {
-      setState(() {
-        ttsState = TtsState.playing;
-      });
-    });
-
-    flutterTts.setCompletionHandler(() {
-      setState(() {
-        ttsState = TtsState.stopped;
-      });
-    });
-
-    flutterTts.setErrorHandler((msg) {
-      setState(() {
-        ttsState = TtsState.stopped;
-      });
-    });
-  }
-
-  Future _getLanguages() async {
-    languages = await flutterTts.getLanguages;
-    print(languages);
-    if (languages != null) setState(() => languages);
-  }
-
-  Future _getVoices() async {
-    voices = await flutterTts.getVoices;
-    print(voices);
-    if (voices != null) setState(() => voices);
-  }
-
-  Future _speak(String text) async {
-    var result = await flutterTts.speak(text);
-    if (result == 1) setState(() => ttsState = TtsState.playing);
-  }
-
-  Future _stop() async {
-    var result = await flutterTts.stop();
-    if (result == 1) setState(() => ttsState = TtsState.stopped);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    flutterTts.stop();
-  }
-
+class ResultList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final question = Provider.of<QuestionsModel>(context);
+    var tts = Tts();
 
     return ListView.builder(
       padding: EdgeInsets.all(10),
@@ -105,10 +19,10 @@ class _ResultListState extends State<ResultList> {
               : Colors.red[100],
           child: InkWell(
             onTap: () {
-              if (isStopped) {
-                _speak(question.wordAt(index).englishExampleSentence);
+              if (tts.isStopped) {
+                tts.speak(question.wordAt(index).englishExampleSentence);
               } else {
-                _stop();
+                tts.stop();
               }
             },
             child: Column(
