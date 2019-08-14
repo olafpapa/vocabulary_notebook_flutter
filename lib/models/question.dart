@@ -209,6 +209,10 @@ class QuestionsModel with ChangeNotifier {
 
   Word get correctWord => _questions[_questionIndex].word;
 
+  Word wordAt(int index) => _questions[index].word;
+
+  bool isCorrectAnswerAt(int index) => _questions[index].result == true;
+
   bool isCorrectAnswer(String answerText) {
     final selectedAnswer = _questions[_questionIndex].selectedAnswer;
     final correctAnswer = _questions[_questionIndex].correctAnswer;

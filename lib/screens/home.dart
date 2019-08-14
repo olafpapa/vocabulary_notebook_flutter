@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vocabulary_notebook_flutter/components/result_list.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
-import 'package:vocabulary_notebook_flutter/components/result.dart';
 import 'package:vocabulary_notebook_flutter/components/quiz.dart';
 
 class Home extends StatelessWidget {
@@ -13,7 +13,11 @@ class Home extends StatelessWidget {
       appBar: AppBar(title: Text('英単語帳')),
       body: question.questionIndex < question.numberOfQuestions
           ? Quiz()
-          : Result(),
+          : ResultList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => question.reset(),
+        child: Icon(Icons.redo),
+      ),
     );
   }
 }
