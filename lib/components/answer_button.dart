@@ -67,7 +67,7 @@ class AnswerButtonState extends State<AnswerButton>
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
             color: question.isCorrectAnswer(answerText)
-                ? Colors.redAccent
+                ? Colors.green[300]
                 : Colors.blueGrey,
             textColor: Colors.white,
             child: Center(
