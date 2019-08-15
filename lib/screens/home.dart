@@ -14,9 +14,10 @@ class Home extends StatelessWidget {
       body: question.questionIndex < question.numberOfQuestions
           ? Quiz()
           : ResultList(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => question.reset(),
-        child: Icon(Icons.redo),
+        label: Text("リセット"),
+        icon: Icon(Icons.redo),
       ),
     );
   }
