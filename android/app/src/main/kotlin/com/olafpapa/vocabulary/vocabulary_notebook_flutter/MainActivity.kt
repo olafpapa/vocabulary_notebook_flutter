@@ -1,4 +1,4 @@
-package com.olafpapa.vocabulary.vocabulary_notebook_flutter
+package com.olafpapa.vocabulary
 
 import android.os.Bundle
 
