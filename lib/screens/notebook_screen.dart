@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vocabulary_notebook_flutter/models/notebook.dart';
+import 'package:vocabulary_notebook_flutter/screens/question_screen.dart';
 import 'package:vocabulary_notebook_flutter/service/firestore_service.dart';
 
 class NotebookScreen extends StatefulWidget {
@@ -48,7 +49,12 @@ class NotebookScreenState extends State<NotebookScreen> {
         itemBuilder: (context, int index) {
           return Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuestionScreen()),
+                );
+              },
               child: ListTile(
                 title: Text(items[index].title),
                 subtitle: Text(items[index].updatedAt.toString()),

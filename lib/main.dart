@@ -8,10 +8,8 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        builder: (context) => QuestionsModel(QuestionType.en2jp),
-        child: MaterialApp(
-          home: NotebookScreen(),
-        ));
+    return MaterialApp(
+      home: NotebookScreen(),
+    );
   }
 }
