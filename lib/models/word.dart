@@ -1,35 +1,36 @@
-class Notebook {}
-
-enum WordClass {
-  noun, // 名詞
-  prenoun, // 代名詞
-  verb, // 動詞
-  transitiveVerb, // 他動詞
-  intransitiveVerb, // 自動詞
-  adjective, // 形容詞
-  adverbm, //副詞
-  preposition, // 前置詞
-  conjunction, // 接続詞
-  others, // その他
-}
-
+// 英単語
 class Word {
-  final String id;
-  final String englishWord;
-  final String englishVoiceUrl;
-  final String japaneseWord;
-  final String englishExampleSentence;
-  final String japaneseExampleSentence;
-  final String remarks;
-  final WordClass wordClass;
+  String id;
+  String english;
+  String japanese;
+  String englishExampleSentence;
+  String japaneseExampleSentence;
+  String remarks;
+  String wordClass;
 
-  Word(
-      {this.id,
-      this.englishWord,
-      this.englishVoiceUrl,
-      this.japaneseWord,
-      this.englishExampleSentence,
-      this.japaneseExampleSentence,
-      this.remarks,
-      this.wordClass});
+  Word();
+
+  // コンストラクタ（Firestoreのデータからインスタンス化）
+  Word.fromMap(String id, Map<String, dynamic> map) {
+    this.id = id;
+    this.english = map['english'];
+    this.japanese = map['japanese'];
+    this.englishExampleSentence = map['englishExampleSentence'];
+    this.japaneseExampleSentence = map['japaneseExampleSentence'];
+    this.remarks = map['remarks'];
+    this.wordClass = map['class'];
+  }
+
+  // Firestoreのデータに変換
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map['english'] = english;
+    map['japanese'] = japanese;
+    map['englishExampleSentence'] = englishExampleSentence;
+    map['japaneseExampleSentence'] = japaneseExampleSentence;
+    map['remarks'] = remarks;
+    map['class'] = wordClass;
+
+    return map;
+  }
 }

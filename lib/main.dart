@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
-import 'package:vocabulary_notebook_flutter/screens/home.dart';
+import 'package:vocabulary_notebook_flutter/screens/notebook_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
         builder: (context) => QuestionsModel(QuestionType.en2jp),
         child: MaterialApp(
-          home: Home(),
+          home: NotebookScreen(),
         ));
   }
 }

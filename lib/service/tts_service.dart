@@ -4,13 +4,10 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 enum TtsState { playing, stopped }
 
-class Tts {
-  static Tts _instance;
-  factory Tts() {
-    _instance ??= Tts._internalConstructor();
-    return _instance;
-  }
-  Tts._internalConstructor();
+class TtsService {
+  static TtsService _instance = new TtsService._internal();
+  factory TtsService() => _instance;
+  TtsService._internal();
 
   FlutterTts flutterTts;
   dynamic languages;

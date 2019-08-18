@@ -48,11 +48,11 @@ class AnswerButtonState extends State<AnswerButton>
   Widget build(BuildContext context) {
     final question = Provider.of<QuestionsModel>(context);
     final answerText = question.type == QuestionType.en2jp
-        ? widget.word.japaneseWord
-        : widget.word.englishWord;
+        ? widget.word.japanese
+        : widget.word.english;
     final translatedText = question.type == QuestionType.en2jp
-        ? widget.word.englishWord
-        : widget.word.japaneseWord;
+        ? widget.word.english
+        : widget.word.japanese;
 
     // https://api.flutter.dev/flutter/widgets/SlideTransition-class.html
     return SlideTransition(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vocabulary_notebook_flutter/models/question.dart';
-import 'package:vocabulary_notebook_flutter/utils/tts.dart';
+import 'package:vocabulary_notebook_flutter/service/tts_service.dart';
 
 class ResultList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final question = Provider.of<QuestionsModel>(context);
-    var tts = Tts();
+    var tts = TtsService();
 
     return ListView.builder(
       padding: EdgeInsets.all(10),
@@ -32,7 +32,7 @@ class ResultList extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: Text(
-                    question.wordAt(index).englishWord,
+                    question.wordAt(index).english,
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -41,7 +41,7 @@ class ResultList extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    question.wordAt(index).japaneseWord,
+                    question.wordAt(index).japanese,
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 18),
                   ),
