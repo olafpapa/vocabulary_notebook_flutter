@@ -19,7 +19,7 @@ class QuestionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<QuestionsModel>(builder: (context, question, _) {
       return Scaffold(
-        appBar: AppBar(title: Text('英単語帳')),
+        appBar: AppBar(title: Text('問題')),
         body: question.questionIndex < question.numberOfQuestions
             ? Quiz()
             : ResultList(),

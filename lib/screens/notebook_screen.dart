@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vocabulary_notebook_flutter/models/notebook.dart';
 import 'package:vocabulary_notebook_flutter/screens/question_screen.dart';
+import 'package:vocabulary_notebook_flutter/screens/word_list_screen.dart';
 import 'package:vocabulary_notebook_flutter/service/firestore_service.dart';
 
 class NotebookScreen extends StatefulWidget {
@@ -14,14 +15,14 @@ class NotebookScreen extends StatefulWidget {
 class NotebookScreenState extends State<NotebookScreen> {
   List<Notebook> items = [];
   FirestoreService db = FirestoreService();
-  StreamSubscription<QuerySnapshot> noteSub;
+  StreamSubscription<QuerySnapshot> subscription;
 
   @override
   void initState() {
     super.initState();
 
-    noteSub?.cancel();
-    noteSub = db.getNoteList().listen((QuerySnapshot snapshot) {
+    subscription?.cancel();
+    subscription = db.getNoteList().listen((QuerySnapshot snapshot) {
       final List<Notebook> notes = snapshot.documents
           .map((documentSnapshot) => Notebook.fromMap(
               documentSnapshot.documentID, documentSnapshot.data))
@@ -35,7 +36,7 @@ class NotebookScreenState extends State<NotebookScreen> {
 
   @override
   void dispose() {
-    noteSub?.cancel();
+    subscription?.cancel();
     super.dispose();
   }
 
@@ -52,7 +53,8 @@ class NotebookScreenState extends State<NotebookScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => QuestionScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => WordListScreen(items[index].id)),
                 );
               },
               child: ListTile(
