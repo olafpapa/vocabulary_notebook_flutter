@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vocabulary_notebook_flutter/models/question.dart';
+import 'package:vocabulary_notebook_flutter/models/question_model.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
 
 class AnswerButton extends StatefulWidget {
