@@ -52,7 +52,7 @@ class _WordListScreenState extends State<WordListScreen> {
         padding: EdgeInsets.all(10),
         itemCount: items.length,
         itemBuilder: (context, int index) {
-          return WordCard(items[index], Colors.grey[100]);
+          return WordCard(items[index], Colors.grey[200]);
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
