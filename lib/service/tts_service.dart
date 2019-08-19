@@ -55,6 +55,7 @@ class TtsService {
   Future speak(String text) async {
     if (flutterTts == null) _initTts();
 
+    await flutterTts.setLanguage("en-US");
     var result = await flutterTts.speak(text);
     if (result == 1) ttsState = TtsState.playing;
   }
