@@ -29,10 +29,13 @@ class QuestionView extends StatelessWidget {
         body: question.questionIndex < question.numberOfQuestions
             ? QuizView()
             : ResultList(),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => question.reset(),
-          label: Text("リセット"),
-          icon: Icon(Icons.redo),
+        floatingActionButton: Visibility(
+          visible: question.questionIndex < question.numberOfQuestions,
+          child: FloatingActionButton.extended(
+            backgroundColor: Colors.blue.withAlpha(180),
+            onPressed: () => question.nextIndex(),
+            label: question.isLastQuestion() ? Text('結果') : Text('次へ'),
+          ),
         ),
       );
     });

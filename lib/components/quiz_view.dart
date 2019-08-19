@@ -30,15 +30,6 @@ class QuizView extends StatelessWidget {
               question.isSelectAnswer()
                   ? SentenceText(question.correctWord)
                   : SizedBox.shrink(),
-              question.isSelectAnswer()
-                  ? FlatButton(
-                      child: question.isLastQuestion()
-                          ? Text('結果を見る')
-                          : Text('${question.questionIndex + 2}問目へ'),
-                      onPressed: () => question.nextIndex(),
-                      textColor: Colors.blue,
-                    )
-                  : SizedBox.shrink(),
             ],
           ),
         ),

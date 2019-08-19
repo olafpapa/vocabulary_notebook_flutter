@@ -56,6 +56,7 @@ class _WordListScreenState extends State<WordListScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.blue.withAlpha(180),
         onPressed: () {
           Navigator.push(
             context,
@@ -64,7 +65,7 @@ class _WordListScreenState extends State<WordListScreen> {
             ),
           );
         },
-        label: Text("テスト開始"),
+        label: Text("テスト"),
       ),
     );
   }
