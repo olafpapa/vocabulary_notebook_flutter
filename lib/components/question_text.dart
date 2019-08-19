@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vocabulary_notebook_flutter/models/questions_model.dart';
 
-class Question extends StatelessWidget {
+class QuestionTexT extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final question = Provider.of<QuestionsModel>(context);

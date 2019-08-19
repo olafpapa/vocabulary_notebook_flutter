@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vocabulary_notebook_flutter/components/result_list.dart';
 import 'package:vocabulary_notebook_flutter/models/question_model.dart';
 import 'package:vocabulary_notebook_flutter/models/questions_model.dart';
-import 'package:vocabulary_notebook_flutter/components/quiz.dart';
+import 'package:vocabulary_notebook_flutter/components/quiz_view.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
 
 class QuestionScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class QuestionView extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(title: Text('問題')),
         body: question.questionIndex < question.numberOfQuestions
-            ? Quiz()
+            ? QuizView()
             : ResultList(),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () => question.reset(),

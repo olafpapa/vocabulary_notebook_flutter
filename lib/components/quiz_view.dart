@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vocabulary_notebook_flutter/components/sentence.dart';
+import 'package:vocabulary_notebook_flutter/components/sentence_text.dart';
 import 'package:vocabulary_notebook_flutter/models/questions_model.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
-import 'package:vocabulary_notebook_flutter/components/question.dart';
+import 'package:vocabulary_notebook_flutter/components/question_text.dart';
 import 'package:vocabulary_notebook_flutter/components/answer_button.dart';
 
-class Quiz extends StatelessWidget {
+class QuizView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<QuestionsModel>(builder: (context, question, _) {
@@ -15,7 +15,7 @@ class Quiz extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              Question(),
+              QuestionTexT(),
               ...(question.currentAnswers).map((Word answer) {
                 return Column(
                   children: <Widget>[
@@ -28,7 +28,7 @@ class Quiz extends StatelessWidget {
                 );
               }).toList(),
               question.isSelectAnswer()
-                  ? Sentence(question.correctWord)
+                  ? SentenceText(question.correctWord)
                   : SizedBox.shrink(),
               question.isSelectAnswer()
                   ? FlatButton(

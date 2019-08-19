@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vocabulary_notebook_flutter/models/word.dart';
 
-class Sentence extends StatelessWidget {
+class SentenceText extends StatelessWidget {
   final Word word;
-  Sentence(this.word);
+  SentenceText(this.word);
 
   @override
   Widget build(BuildContext context) {
