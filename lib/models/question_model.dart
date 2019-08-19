@@ -41,31 +41,32 @@ class QuestionModel {
 }
 
 class QuestionsModel with ChangeNotifier {
-  int _questionIndex = 0;
-  QuestionType type;
+  final QuestionType type;
+  final List<Word> words;
+  List<QuestionModel> questions;
+  int questionIndex = 0;
 
-  final sampleNotebook = [
-    // Word(
-    //   id: '1',
-    //   englishWord: 'mean',
-    //   wordClass: WordClass.transitiveVerb,
-    //   japaneseWord: '〜を意図する',
-    //   remarks: 'mean to do ~ (~することを意図する)',
-    //   englishExampleSentence: 'I did\'t mean to hurt you.',
-    //   japaneseExampleSentence: 'あなたを傷つけようと意図したのではない。',
-    // ),
-  ];
+  // コンストラクタ
+  QuestionsModel(this.type, this.words) {
+    questions = words
+        .asMap()
+        .map((index, word) =>
+            MapEntry(index, QuestionModel(type, word, _makeAnswers(index, 3))))
+        .values
+        .toList();
+    print(questions);
+  }
 
   // 選択肢を作成する
   List<Word> _makeAnswers(int index, int numberOfIncorrectAnswers) {
     // 正解のindex以外からランダムなindexを作成する
-    if (numberOfIncorrectAnswers + 1 > sampleNotebook.length) {
+    if (numberOfIncorrectAnswers + 1 > words.length) {
       return [];
     }
     final rand = new Random();
     var indexArray = [];
     while (indexArray.length < numberOfIncorrectAnswers) {
-      var n = rand.nextInt(sampleNotebook.length);
+      var n = rand.nextInt(words.length);
       if (n != index && !indexArray.contains(n)) {
         indexArray.add(n);
       }
@@ -77,57 +78,45 @@ class QuestionsModel with ChangeNotifier {
     indexArray.shuffle();
 
     return indexArray.map((index) {
-      return sampleNotebook[index];
+      return words[index];
     }).toList();
   }
 
-  List<QuestionModel> _questions;
+  String get currentQuestion => questions[questionIndex].question;
 
-  // コンストラクタ
-  QuestionsModel(this.type) {
-    _questions = []
-        .map((index) =>
-            QuestionModel(type, sampleNotebook[index], _makeAnswers(index, 3)))
-        .toList();
-  }
+  String get correctAnswer => questions[questionIndex].correctAnswer;
 
-  int get questionIndex => _questionIndex;
-
-  String get currentQuestion => _questions[_questionIndex].question;
-
-  String get correctAnswer => _questions[_questionIndex].correctAnswer;
-
-  int get numberOfQuestions => _questions.length;
+  int get numberOfQuestions => questions.length;
 
   int get numberOfRightAnswers =>
-      _questions.where((q) => q.result == true).toList().length;
+      questions.where((q) => q.result == true).toList().length;
 
-  List<Word> get currentAnswers => _questions[_questionIndex].answers;
+  List<Word> get currentAnswers => questions[questionIndex].answers;
 
-  Word get correctWord => _questions[_questionIndex].word;
+  Word get correctWord => questions[questionIndex].word;
 
-  Word wordAt(int index) => _questions[index].word;
+  Word wordAt(int index) => questions[index].word;
 
-  bool isCorrectAnswerAt(int index) => _questions[index].result == true;
+  bool isCorrectAnswerAt(int index) => questions[index].result == true;
 
   bool isCorrectAnswer(String answerText) {
-    final selectedAnswer = _questions[_questionIndex].selectedAnswer;
-    final correctAnswer = _questions[_questionIndex].correctAnswer;
+    final selectedAnswer = questions[questionIndex].selectedAnswer;
+    final correctAnswer = questions[questionIndex].correctAnswer;
     return selectedAnswer != null && answerText == correctAnswer;
   }
 
-  bool isSelectAnswer() => _questions[_questionIndex].selectedAnswer != null;
+  bool isSelectAnswer() => questions[questionIndex].selectedAnswer != null;
 
-  bool isLastQuestion() => _questions.length - 1 == _questionIndex;
+  bool isLastQuestion() => questions.length - 1 == questionIndex;
 
   void nextIndex() {
-    _questionIndex++;
+    questionIndex++;
     notifyListeners();
   }
 
   void reset() {
-    _questionIndex = 0;
-    _questions.forEach((question) {
+    questionIndex = 0;
+    questions.forEach((question) {
       question.selectedAnswer = null;
       question.result = null;
     });
@@ -135,8 +124,8 @@ class QuestionsModel with ChangeNotifier {
   }
 
   void selectAnswer(String answerText) {
-    _questions[_questionIndex].selectedAnswer = answerText;
-    _questions[_questionIndex].result = isCorrectAnswer(answerText);
+    questions[questionIndex].selectedAnswer = answerText;
+    questions[questionIndex].result = isCorrectAnswer(answerText);
     notifyListeners();
   }
 }

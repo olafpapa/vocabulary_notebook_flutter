@@ -60,7 +60,7 @@ class _WordListScreenState extends State<WordListScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => QuestionScreen(),
+              builder: (context) => QuestionScreen(items),
             ),
           );
         },
