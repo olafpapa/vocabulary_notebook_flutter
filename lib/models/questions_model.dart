@@ -10,25 +10,37 @@ class QuestionsModel with ChangeNotifier {
   int questionIndex = 0;
 
   // コンストラクタ
-  QuestionsModel(this.type, this.words) {
-    questions = words
+  QuestionsModel(this.type, this.words, {int numberOfQuestions = 20}) {
+    // ランダムに問題を選ぶ
+    List<Word> randomWords = [];
+    while (randomWords.length < numberOfQuestions) {
+      final rand = new Random();
+      final n = rand.nextInt(words.length);
+      if (randomWords.contains(words[n])) {
+        continue;
+      }
+      randomWords.add(words[n]);
+    }
+
+    questions = randomWords
         .asMap()
-        .map((index, word) =>
-            MapEntry(index, QuestionModel(type, word, _makeAnswers(index, 3))))
+        .map((index, word) => MapEntry(index,
+            QuestionModel(type, word, _makeAnswers(index, 3, randomWords))))
         .values
         .toList();
   }
 
   // 選択肢を作成する
-  List<Word> _makeAnswers(int index, int numberOfIncorrectAnswers) {
+  List<Word> _makeAnswers(
+      int index, int numberOfIncorrectAnswers, List<Word> randomWords) {
     // 正解のindex以外からランダムなindexを作成する
-    if (numberOfIncorrectAnswers + 1 > words.length) {
+    if (numberOfIncorrectAnswers + 1 > randomWords.length) {
       return [];
     }
     final rand = new Random();
     var indexArray = [];
     while (indexArray.length < numberOfIncorrectAnswers) {
-      var n = rand.nextInt(words.length);
+      var n = rand.nextInt(randomWords.length);
       if (n != index && !indexArray.contains(n)) {
         indexArray.add(n);
       }
@@ -40,7 +52,7 @@ class QuestionsModel with ChangeNotifier {
     indexArray.shuffle();
 
     return indexArray.map((index) {
-      return words[index];
+      return randomWords[index];
     }).toList();
   }
 
