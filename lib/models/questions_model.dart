@@ -10,8 +10,19 @@ class QuestionsModel with ChangeNotifier {
   int questionIndex = 0;
 
   // コンストラクタ
-  QuestionsModel(this.type, this.words) {
-    questions = words
+  QuestionsModel(this.type, this.words, {int numberOfQuestions = 10}) {
+    // ランダムに問題を選ぶ
+    List<Word> randomWords = [];
+    while (randomWords.length < numberOfQuestions) {
+      final rand = new Random();
+      final n = rand.nextInt(words.length);
+      if (randomWords.contains(words[n])) {
+        continue;
+      }
+      randomWords.add(words[n]);
+    }
+
+    questions = randomWords
         .asMap()
         .map((index, word) =>
             MapEntry(index, QuestionModel(type, word, _makeAnswers(index, 3))))
