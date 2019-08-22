@@ -76,7 +76,7 @@ class AnswerButtonState extends State<AnswerButton>
                 children: <Widget>[
                   Text(
                     answerText,
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 20),
                   ),
                   question.isSelectAnswer()
                       ? Text(
